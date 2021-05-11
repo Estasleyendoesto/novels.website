@@ -73,6 +73,8 @@ https://pypi.org/project/django-cleanup/
 
 ### Django Multiselectfield
 
+A new model field and form field. With this you can get a multiple select from a choices. Stores to the database as a CharField of comma-separated values.
+
 ```
 https://pypi.org/project/django-multiselectfield/
 ```
@@ -81,6 +83,8 @@ https://pypi.org/project/django-multiselectfield/
 
 ### DjangoTaggit
 
+django-taggit a simpler approach to tagging with Django. Add "taggit" to your INSTALLED_APPS then just add a TaggableManager to your model and go
+
 ```
 https://pypi.org/project/django-taggit/
 ```
@@ -88,6 +92,8 @@ https://pypi.org/project/django-taggit/
 
 
 ### Django Hit-count
+
+Basic app that allows you to track the number of hits/views for a particular object.
 
 ```
 https://pypi.org/project/django-hitcount/
