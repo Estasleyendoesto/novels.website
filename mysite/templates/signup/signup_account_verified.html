@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+
+{% block title %}Cuenta verificada{% endblock %}
+
+{% block content %}
+<main class="site-home">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>
+                Verificación de cuenta {% if user.is_authenticated %} exitosa {% else %} fallida {% endif %}
+            </p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            {% if user.is_authenticated %}
+                {{ user.username }}, tu cuenta ha sido comfirmada!
+            {% else %}
+                Enlace inválido o expirado!
+            {% endif %}
+        </figcaption>
+        <figcaption class="blockquote-footer">
+            Redirigiendo en 5 segundos
+        </figcaption>
+    </figure>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'home' %}";
+    }, 5000);
+</script>
+{% endblock %}

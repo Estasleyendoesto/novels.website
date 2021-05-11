@@ -1,0 +1,18 @@
+{% extends '../base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<main class="text-center">
+    <h2 class="display-4 p-5">Registrarse</h2>
+
+    <form action="{% url 'signup' %}" method="post" id="form">
+        {% csrf_token %}
+
+        {% include 'form.html' %}
+
+        <button class="btn btn-info">Iniciar Sesión</button>
+    </form>
+</main>
+{% endblock %}
+

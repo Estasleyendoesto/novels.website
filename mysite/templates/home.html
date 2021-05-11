@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<main class="site-home">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>
+                {% if user.is_authenticated %}
+                    Welcome, {{ user.username }}
+                {% else %}
+                    Your are as a visitor
+                {% endif %}
+            </p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            {% if request.path == '/' %}
+                Home/
+            {% else %}
+                {{ request.path }}
+            {% endif %}
+        </figcaption>
+    </figure>
+</main>
+{% endblock %}
