@@ -1,6 +1,8 @@
 from django.contrib.contenttypes.fields import GenericRelation
-from ..likes.models import Like
 from django.db import models
+
+from ..hits.models import Hit
+from ..likes.models import Like
 
 class Novel(models.Model):
     title         = models.CharField(max_length=180, null=False, blank=False)
@@ -20,6 +22,7 @@ class Novel(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación')
     last_update   = models.DateTimeField(auto_now=True)
     likes         = GenericRelation(Like, related_query_name='novel')
+    hits          = GenericRelation(Hit, related_query_name='novel')
 
     def __str__(self):
         return self.title

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'apps.users',
     'apps.likes',
+    'apps.hits',
     'apps.novels',
 
     'captcha'

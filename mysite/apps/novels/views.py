@@ -12,6 +12,8 @@ def test(request):
     qs = obj.likes.all()
     data = serializers.serialize('json', qs)
 
+    print('--------------->', request.META.get('HTTP_USER_AGENT'))
+
     return HttpResponse(data, content_type='application/json')
 
 def savetest(request):

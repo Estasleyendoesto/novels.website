@@ -65,6 +65,7 @@ Las operaciones que podemos realizar están detalladas aquí:
 
 
 Antes que un usuario de like a un objeto, primero debemos comprobar si este usuario ya ha dado like para negarlo
+> Barajando la posibilidad de crear un mixin ClassView que se encargue automáticamente de hacer la comprobación e insertar los likes dentro del template
 
 ```python
 from django.http import HttpResponse

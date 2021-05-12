@@ -17,7 +17,7 @@ def account_verify(user, request):
     current_site = get_current_site(request)
     uid          = urlsafe_base64_encode( force_bytes(user.pk) )
     token        = account_activation_token.make_token(user)
-    protocol     = 'https' if request.is_secure() else 'http'
+    protocol     = request.scheme #'https' if request.is_secure() else 'http'
 
     send_email(user, current_site, uid, token, protocol)
 
