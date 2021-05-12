@@ -63,7 +63,6 @@ Las operaciones que podemos realizar están detalladas aquí:
 > https://docs.djangoproject.com/en/3.2/ref/contrib/contenttypes/#reverse-generic-relations
 
 
-
 Antes que un usuario de like a un objeto, primero debemos comprobar si este usuario ya ha dado like para negarlo
 > Barajando la posibilidad de crear un mixin ClassView que se encargue automáticamente de hacer la comprobación e insertar los likes dentro del template
 
@@ -81,6 +80,17 @@ def myView(request):
     novel.likes.create(user=user, like=False)
     return HttpResponse('Like completado')
 
+```
+#### Nota del desarrollador:
+Actualmente se ha creado un mixin llamado LikesView que hace precisamente este trabajo. Devuelve al contexto un contador de Likes y Dislikes y evalúa una votación del usuario para actualizar su estado o crear un nuevo registro. Para activarlo, una vista **DetailView** debe hederarlo antes que nada.
+> No funciona con TemplateView o cualquier otra vista basada en clases
+
+> El contexto devuelve: `likes`, `dislikes` como integers para el template
+```python
+from ..likes.views import LikesMixin
+
+class MyView(LikesMixin, DetailView):
+    pass
 ```
 
 

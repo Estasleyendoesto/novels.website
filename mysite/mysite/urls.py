@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name="home.html"), name='home'),
     path('member/', include('apps.users.urls')),
-    path('test/', include('apps.novels.urls')),
+    path('novela/', include('apps.novels.urls')),
 
     path('captcha/', include('captcha.urls')),
 ]

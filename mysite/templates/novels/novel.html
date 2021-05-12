@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+
+{% block title %}Novela{% endblock %}
+
+{% block content %}
+<main class="site-home">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>
+                {{ novel.title }}
+            </p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            {{ novel.get_type_display }}
+        </figcaption>
+        <figcaption class="blockquote-footer">
+            {{ novel.get_structure_display }}
+        </figcaption>
+        <figcaption class="blockquote-footer">
+            {{ likes }} likes & {{ dislikes }} dislikes
+        </figcaption>
+        <figcaption class="blockquote-footer">
+            {% for like in likeslist %}
+                <p> {% if like.like %}Like{% else %}Dislike{% endif %}
+                by {{ like.user }}</p>
+            {% endfor %}
+        </figcaption>
+    </figure>
+</main>
+{% endblock %}
