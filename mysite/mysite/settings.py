@@ -140,7 +140,8 @@ AUTHENTICATION_BACKENDS = ['apps.users.backends.UsernameEmailBackend']
 # Esto para el modo de desarrollo (eliminar en producción)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+# Tiempo que permanecerán los HitsLogs en la Base de Datos
+KEEP_HITSLOGS_IN_DB = {'days': 30}
 
 # Validación de registro
 EMAIL_VERIFY_TIMEOUT = 60 # In seconds

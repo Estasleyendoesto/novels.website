@@ -103,6 +103,7 @@ def myView(request):
 
 ```
 #### Nota del desarrollador:
+
 Actualmente se ha creado un mixin llamado LikesMixin que hace precisamente este trabajo. Devuelve al contexto un contador de Likes y Dislikes y evalúa una votación del usuario para actualizar su estado o crear un nuevo registro. Para activarlo, una vista **DetailView** debe hederarlo antes que nada.
 > No funciona con TemplateView o cualquier otra vista basada en clases
 
@@ -118,7 +119,61 @@ class MyView(LikesMixin, DetailView):
 
 
 
+### Sistema contador de visitas
 
+Implementado un sistema para contar las visitas de cualquier objeto con `DetailView` o `UpdateView` mediante un mixin `HitsMixin`. Es necesario habilitar la funcionalidad añadiendo al modelo una relación genérica.
+
+```python
+from django.contrib.contenttypes.fields import GenericRelation
+from ..hits.models import Hit
+
+class MyModel(...):
+    ...
+    hits = GenericRelation(Hit, related_query_name='myModel') # Minúscula
+```
+
+
+
+La vista que implemente el mixin tiene que heredad de `HitsMixin` y puede combinarse junto a cualquier otro mixin.
+
+> `HitsMixin` añade al contexto un contador de visitas totales `hits`
+>
+> Con el atributo `self.hit` podemos acceder al contador de visitas que apunta al objeto 
+
+```python
+from django.views.generic.detail import DetailView
+
+from .models import Novel
+from ..hits.mixins import HitsMixin
+from ..likes.mixins import LikesMixin
+
+class NovelView(HitsMixin, LikesMixin, DetailView):
+    template_name = 'novels/novel.html'
+    context_object_name = 'novel'
+    model = Novel
+```
+
+
+
+Mediante `manage.py` podemos limpiar todos los registros en  `HitsLog` pasado x tiempo. Por defecto limpiará todos los registros con una antigüedad superior a 30 días. Para cambiar la antigüedad debemos añadir en `settings.py` la variable:
+
+```python
+KEEP_HITSLOGS_IN_DB = {'days': 30}
+```
+
+> Estamos usando `datetime.timedelta` para definir el tiempo por lo que podemos definir segundos, horas, meses, etc. Mirar en la documentación de `timedelta`
+
+
+
+El comando que usaremos para limpiar los registros es:
+
+```python
+py manage.py clean_hits
+```
+
+> Se intenta conseguir que con **`cronjobs`** se automatice la limpieza periódica. Por el momento no hay solución.
+
+ 
 
 ## Librerías necesarias
 
