@@ -1,9 +1,10 @@
 from django.views.generic.detail import DetailView
 
 from .models import Novel
-from ..likes.views import LikesMixin
+from ..hits.mixins import HitsMixin
+from ..likes.mixins import LikesMixin
 
-class NovelView(LikesMixin, DetailView):
+class NovelView(HitsMixin, LikesMixin, DetailView):
     template_name = 'novels/novel.html'
     context_object_name = 'novel'
     model = Novel

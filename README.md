@@ -45,6 +45,27 @@ def test(request):
 ```
 
 
+### Rutas con slug
+Se va a cambiar el buscador por id a uno por slug (en el caso de las novelas y usermane).
+Debemos primero poner que el username o el título de la novela sea único y un max_length
+```python
+>>> from django.template.defaultfilters import slugify
+>>> slugify("b b b b")
+u'b-b-b-b'
+>>>
+```
+
+Podemos adherirlo directamente al modelo interceptando el método save()
+```python
+class Test(models.Model):
+    q = models.CharField(max_length=30)
+    s = models.SlugField()
+    
+    def save(self, *args, **kwargs):
+        self.s = slugify(self.q)
+        super(Test, self).save(*args, **kwargs)
+```
+
 
 ### Sistema de likes
 Para habilitar los likes en un modelo, primero implementar la relación dentro de este
@@ -82,12 +103,14 @@ def myView(request):
 
 ```
 #### Nota del desarrollador:
-Actualmente se ha creado un mixin llamado LikesView que hace precisamente este trabajo. Devuelve al contexto un contador de Likes y Dislikes y evalúa una votación del usuario para actualizar su estado o crear un nuevo registro. Para activarlo, una vista **DetailView** debe hederarlo antes que nada.
+Actualmente se ha creado un mixin llamado LikesMixin que hace precisamente este trabajo. Devuelve al contexto un contador de Likes y Dislikes y evalúa una votación del usuario para actualizar su estado o crear un nuevo registro. Para activarlo, una vista **DetailView** debe hederarlo antes que nada.
 > No funciona con TemplateView o cualquier otra vista basada en clases
 
 > El contexto devuelve: `likes`, `dislikes` como integers para el template
+
+> Cuando el usuario haga like / dislike devolverá un Json con una respuesta (Debemos usar AJAX en este caso)
 ```python
-from ..likes.views import LikesMixin
+from ..likes.mixins import LikesMixin
 
 class MyView(LikesMixin, DetailView):
     pass
