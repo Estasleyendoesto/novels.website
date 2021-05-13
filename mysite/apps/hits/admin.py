@@ -14,11 +14,14 @@ class HitAdmin(admin.ModelAdmin):
 
 @admin.register(HitsLog)
 class HitsLogAdmin(admin.ModelAdmin):
-    list_display  = ['creation_date', 'user', 'ip', 'user_agent', 'hit']
+    list_display  = ['creation_date', 'user', 'ip', 'user_agent', 'object']
     list_filter   = ('creation_date',)
     search_fields = ['ip', 'user', 'hit', 'user_agent']
     list_display_links = None
     show_full_result_count = True
+
+    def object(self, obj):
+        return obj.hit.object
 
     def has_add_permission(self, request):
         return False
