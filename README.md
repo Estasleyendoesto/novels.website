@@ -172,8 +172,15 @@ py manage.py clean_hits
 ```
 
 > Se intenta conseguir que con **`cronjobs`** se automatice la limpieza periódica. Por el momento no hay solución.
+#### Notas del desarrollador
+Es un coñazo implementar crons porque todos los repositorios están anticuados y la única alternativa a esto sería usar Celerys junto con RabbitMQ y es otro coñazo de instalación peor que el anterior. Así que, e ideando alternativas creativas, se ha añadido dentro del panel administrador de Django en el modelo de HitsLog una acción para eliminar todos los registros que extrae de `settings.py`. Eso sí, primero hay que seleccionar todos los registros antes de ejecutar la acción que ya viene seleccionada por defecto.
 
- 
+> Celerys y RabbitMQ su uso principal es cuando queramos implementar un chat para los usuarios en tiempo real o algo similar ya que usa un servidor aparte instalado en la máquina que gestiona demonios ejecutándose concurrentemente. RabbitMQ es ese servidor y Celerys lo conecta con nuestras vistas en Django.
+
+
+
+
+
 
 ## Librerías necesarias
 
