@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'apps.likes',
     'apps.hits',
     'apps.novels',
+    'apps.fansubs',
 
-    'captcha'
+    'captcha',
+    'django_quill',
 ]
 
 MIDDLEWARE = [

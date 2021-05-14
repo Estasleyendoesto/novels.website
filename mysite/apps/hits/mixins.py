@@ -74,5 +74,3 @@ class HitsMixin:
         context = super().get_context_data(**kwargs)
         context['hits'] = self.hit.hits
         return context
-
-    def get_custom_object(self, )0

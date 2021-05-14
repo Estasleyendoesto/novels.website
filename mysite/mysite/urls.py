@@ -9,6 +9,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="home.html"), name='home'),
     path('member/', include('apps.users.urls')),
     path('novela/', include('apps.novels.urls')),
+    path('fansub/', include('apps.fansubs.urls')),
 
     path('captcha/', include('captcha.urls')),
 ]

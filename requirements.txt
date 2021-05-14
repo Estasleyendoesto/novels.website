@@ -4,3 +4,4 @@ django-simple-captcha>=0.5.14
 django-cleanup>=5.1.0
 django-multiselectfield>=0.1.12 
 django-taggit>=1.4.0
+django-quill-editor>=0.1.22

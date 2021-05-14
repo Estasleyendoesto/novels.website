@@ -1,0 +1,25 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}Editar novela{% endblock %}
+{% block css %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<main class="site-home">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>
+                Edita tu contribución
+            </p>
+        </blockquote>
+    </figure>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.content }}
+        <button class="btn btn-info">Actializar o Guardar</button>
+    </form>
+</main>
+{% endblock %}
