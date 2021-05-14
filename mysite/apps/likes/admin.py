@@ -5,7 +5,7 @@ from .models import Like
 class LikeAdmin(admin.ModelAdmin):
     list_display  = ['source', 'object', 'user', 'like', 'creation_date']
     list_filter   = ('like', 'creation_date')
-    search_fields = ['object', 'user', 'like']
+    search_fields = ['user__username', 'like']
     ordering      = ['-creation_date']
     list_display_links = None
     show_full_result_count = True

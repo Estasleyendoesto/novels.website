@@ -1,11 +1,15 @@
 from django.contrib.contenttypes.fields import GenericRelation
+from django.template.defaultfilters import slugify
+
+from django.urls import reverse
 from django.db import models
 
 from ..hits.models import Hit
 from ..likes.models import Like
 
 class Novel(models.Model):
-    title         = models.CharField(max_length=180, null=False, blank=False)
+    title         = models.CharField(max_length=180, null=False, blank=False, unique=True)
+    slug          = models.SlugField(max_length=180, null=False, blank=False, unique=True)
 
     TYPE_CHOICES = [
         ('LN', 'Light novel'),  
@@ -26,6 +30,13 @@ class Novel(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('novel', args=[ slugify(self.title), None ])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Distro(models.Model):

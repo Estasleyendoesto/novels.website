@@ -5,11 +5,12 @@ from .utils import get_ip
 
 class HitsMixin:
     """
-    Solo puede usarse con DetailView o UpdateView 
-    (Porque básicamente requiere un objeto)
+    Solo puede usarse con DetailView, UpdateView, TemplateView... 
+    (Porque básicamente requiere un objeto, o usar el atributo custom_object)
     """
     keep_hit_active = {'days': 7}
     max_hits_per_ip = 0
+    object_to_hit = None    # Mymodel.objects.get(...)
     hit = None
 
     def hit_eval(self, request):
@@ -21,7 +22,10 @@ class HitsMixin:
         user        = request.user
         user_agent  = request.META.get('HTTP_USER_AGENT', '')[:255]
         session_key = request.session.session_key
-        object      = self.get_object()
+        object      = self.object_to_hit
+    
+        if not object:
+            object  = self.object_to_hit()
 
         try:
             hit = object.hits.get()
@@ -70,3 +74,5 @@ class HitsMixin:
         context = super().get_context_data(**kwargs)
         context['hits'] = self.hit.hits
         return context
+
+    def get_custom_object(self, )0

@@ -13,7 +13,7 @@ from .models import Hit, HitsLog
 class HitAdmin(admin.ModelAdmin):
     list_display = ['source', 'object', 'hits', 'last_hit']
     list_filter  = ('hits', 'last_hit')
-    search_fields = ['object', 'hits', 'last_hit']
+    search_fields = ['hits', 'last_hit']
     show_full_result_count = True
 
     def source(self, obj):

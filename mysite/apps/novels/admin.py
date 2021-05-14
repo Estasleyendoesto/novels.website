@@ -3,4 +3,4 @@ from .models import Novel
 
 @admin.register(Novel)
 class NovelAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug', 'pk', 'creation_date', 'last_update')

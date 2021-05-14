@@ -7,6 +7,7 @@ from ..likes.mixins import LikesMixin
 class NovelView(HitsMixin, LikesMixin, DetailView):
     template_name = 'novels/novel.html'
     context_object_name = 'novel'
+    slug_url_kwarg = 'slug'
     model = Novel
 
     def get_context_data(self, **kwargs):
