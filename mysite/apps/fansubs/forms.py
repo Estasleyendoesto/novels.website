@@ -1,5 +1,9 @@
 from django import forms
-from django_quill.forms import QuillFormField
+from .models import Contrib
 
-class QuillFieldForm(forms.Form):
-    content = QuillFormField()
+
+class ContribForm(forms.ModelForm):
+
+    class Meta:
+        model = Contrib
+        fields = ['content',]

@@ -183,6 +183,20 @@ Es un coñazo implementar crons porque todos los repositorios están anticuados 
 
 
 ## Librerías necesarias
+### Django Compressor
+Comprime css en un solo bundle con un hash y lo mismo para los scripts. Debemos habilitar la compresión offline para que se almacene en caché y así no se tenga que comprimir cada vez que un usuario haga un request. Otra gran virtud que tiene es la de compilar JS y comprimirlo, además de compilar SASS o LESS y comprimirlo.
+Tiene soporte por si insertarmos dentro de los scripts datos desde Django como `{{ name }}`.
+```
+https://github.com/django-compressor/django-compressor/
+```
+> Ver lo demás en la documentación
+
+### Django node assets
+Si no tengo entendido mal (además de ser muy sencillo su configuración interna, genial para mantenerlo si el autor deja de hacerlo), esta librería nos permite
+importar los assets que descargamos desde node para ser usados por Django como si importáramos cualquier otra librería estática. Podría ser posible usarlo con
+el Django Compressor, faltaría experimentar.
+> https://github.com/whitespy/django-node-assets
+
 
 ### Pillow
 

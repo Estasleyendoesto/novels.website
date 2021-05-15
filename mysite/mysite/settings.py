@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'apps.fansubs',
 
     'captcha',
-    'django_quill',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +146,4 @@ KEEP_HITSLOGS_IN_DB = {'days': 30}
 
 # Validación de registro
 EMAIL_VERIFY_TIMEOUT = 60 # In seconds
+
